@@ -43,15 +43,22 @@ def make_chains(text_string):
 
     chains = {}
 
+    text_string_list = text_string.rstrip().split()
 
-    for i in range(len(text_string)-1):
-        bigrams_list = []
-        bigram = (text_string[i], text_string[i+1])
-        bigrams_list.append(bigrams)
-        print(bigrams_list)
-        # following_words = []
-        # foll
-        # chains[bigram] = []
+    bigrams_list = []
+
+    for i in range(len(text_string_list) - 1):
+        bigram = (text_string_list[i], text_string_list[i+1])
+        bigrams_list.append(bigram)
+
+    # for bigram in bigrams_list:
+    #     chains[bigram] = []
+
+    for i in range(len(text_string_list)-2):
+        if (text_string_list[i], text_string_list[i+1]) == bigrams_list[i]:
+            following_word = text_string_list[i+2]
+            chains[bigrams_list[i]].append(following_word)
+            .get('key', []).append
 
     return chains
 
