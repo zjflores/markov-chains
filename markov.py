@@ -57,8 +57,9 @@ def make_chains(text_string):
     for i in range(len(text_string_list)-2):
         if (text_string_list[i], text_string_list[i+1]) == bigrams_list[i]:
             following_word = text_string_list[i+2]
-            chains[bigrams_list[i]].append(following_word)
-            .get('key', []).append
+            # chains[bigrams_list[i]].append(following_word)
+            chains.get(bigrams_list[i], []).append(following_word)
+    print(chains)
 
     return chains
 
