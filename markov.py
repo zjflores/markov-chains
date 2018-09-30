@@ -47,18 +47,31 @@ def make_chains(text_string):
 
     bigrams_list = []
 
-    for i in range(len(text_string_list) - 1):
-        bigram = (text_string_list[i], text_string_list[i+1])
-        bigrams_list.append(bigram)
+    for i in range(len(text_string_list) - 2):
+        bigram = (text_string_list[i], text_string_list[i + 1])
+        next_word = text_string_list[i + 2]
+        if not bigram in chains:
+            chains[bigram] = []
+        chains[bigram] = chains[bigram].append(next_word)
+        # chains[bigram] = chains.get(bigram, []).append(next_word)
 
     # for bigram in bigrams_list:
     #     chains[bigram] = []
+    for bigram in bigrams_list:
+        following_words = []
+        for i in range(len(text_string_list)-2):
+            check_bigram = (text_string_list[i], text_string_list[i+1])
+            if  check_bigram == bigrams:
+                following_word = text_string_list[i+2]
+                following_words.append(following_word)
+        chains[bigram] = following_words
+        # chains.get(bigram,[]).append(following_words)
+                # chains[bigrams_list[i]].append(following_word)
+                # chains.get(bigrams_list[i], []).append(following_word)
+                # print(chains.get(bigrams_list[i]))
 
-    for i in range(len(text_string_list)-2):
-        if (text_string_list[i], text_string_list[i+1]) == bigrams_list[i]:
-            following_word = text_string_list[i+2]
-            # chains[bigrams_list[i]].append(following_word)
-            chains.get(bigrams_list[i], []).append(following_word)
+
+
     print(chains)
 
     return chains
@@ -86,5 +99,3 @@ chains = make_chains(input_text)
 random_text = make_text(chains)
 
 print(random_text)
-
-print(type(open_and_read_file(input_path)))
