@@ -85,12 +85,12 @@ def make_text(chains):
         else:
             break
 
-    # your code goes here
-
     return " ".join(words)
 
 
 input_path = "green-eggs.txt"
+
+# input_path = "gettysburg.txt"
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
