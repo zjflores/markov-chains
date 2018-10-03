@@ -69,18 +69,21 @@ def make_text(chains):
     random_first_value = choice(chains[random_first_key])
     words.append(random_first_value)
 
-    print(words)
+    # print(words)
 
 
     n = 0
-    # while use get to loop
+    while True:
         next_key = words[1 + n], words[2 + n]
-        next_value = choice(chains[next_key])
-        words.append(next_value)
-        print(words)
-        n += 1
-        print(n)
-        
+        if chains.get(next_key, False):
+            next_value = choice(chains[next_key])
+            words.append(next_value)
+            # print(words)
+            n += 1
+            # print(n)
+            
+        else:
+            break
 
     # your code goes here
 
