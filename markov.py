@@ -52,30 +52,9 @@ def make_chains(text_string):
         next_word = text_string_list[i + 2]
         if not bigram in chains:
             chains[bigram] = []
-        chains[bigram] = chains[bigram].append(next_word)
-        # chains[bigram] = chains.get(bigram, []).append(next_word)
-
-    # for bigram in bigrams_list:
-    #     chains[bigram] = []
-    for bigram in bigrams_list:
-        following_words = []
-        for i in range(len(text_string_list)-2):
-            check_bigram = (text_string_list[i], text_string_list[i+1])
-            if  check_bigram == bigrams:
-                following_word = text_string_list[i+2]
-                following_words.append(following_word)
-        chains[bigram] = following_words
-        # chains.get(bigram,[]).append(following_words)
-                # chains[bigrams_list[i]].append(following_word)
-                # chains.get(bigrams_list[i], []).append(following_word)
-                # print(chains.get(bigrams_list[i]))
-
-
-
-    print(chains)
+        chains[bigram].append(next_word)
 
     return chains
-
 
 def make_text(chains):
     """Return text from chains."""
