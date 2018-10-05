@@ -1,6 +1,8 @@
 """Generate Markov text from text files."""
 
+import sys
 from random import choice
+input_path = sys.argv[1]
 
 
 def open_and_read_file(file_path):
@@ -32,26 +34,47 @@ def make_chains(text_string):
 	"""
 	chains = {}
 	text_string_list = text_string.rstrip().split()
-	for i in range(len(text_string_list) - 2):
-		bigram = (text_string_list[i], text_string_list[i + 1])
-		next_word = text_string_list[i + 2]
-		if not bigram in chains:
-			chains[bigram] = []
-		chains[bigram].append(next_word)
+	n_gram_length = int(input("How long do you want your keys to be? (ints only plz kthxbai)"))
+	for i in range(len(text_string_list) - n_gram_length):
+		# bigram = (text_string_list[i], text_string_list[i + 1])
+		n_gram = tuple(text_string_list[i:i+n_gram_length])
+		next_word = text_string_list[i+n_gram_length]
+		# if not bigram in chains:
+		# 	chains[bigram] = []
+		# chains[bigram].append(next_word)
+		if not n_gram in chains:
+			chains[n_gram] = []
+		chains[n_gram].append(next_word)
 	return chains
+	
 
 
 def make_text(chains):
 	
 	"""Return text from chains."""
 
+	# keys_list=list(chains.keys())
+	# random_first_key = choice(keys_list)
+	# words = list(random_first_key)
+
+	# n = 0
+	# while True:
+	# 	link = words[n], words[1 + n]
+	# 	if chains.get(link, False):
+	# 		link_value = choice(chains[link])
+	# 		words.append(link_value)
+	# 		n += 1
+	# 	else:
+	# 		return " ".join(words)
+
 	keys_list=list(chains.keys())
 	random_first_key = choice(keys_list)
+	n_gram_length = len(random_first_key)
 	words = list(random_first_key)
 
-	n = -1
+	n = 0
 	while True:
-		link = words[1 + n], words[2 + n]
+		link = tuple(words[n: n + n_gram_length])
 		if chains.get(link, False):
 			link_value = choice(chains[link])
 			words.append(link_value)
@@ -61,7 +84,6 @@ def make_text(chains):
 
 
 # input_path = "green-eggs.txt"
-input_path = "gettysburg.txt"
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
@@ -73,3 +95,5 @@ chains = make_chains(input_text)
 random_text = make_text(chains)
 
 print(random_text)
+
+# print(chains)
