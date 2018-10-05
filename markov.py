@@ -68,7 +68,11 @@ def make_text(chains):
 	# 		return " ".join(words)
 
 	keys_list=list(chains.keys())
-	random_first_key = choice(keys_list)
+	while True:
+		random_first_key = choice(keys_list)
+		if random_first_key[0][0] in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+			break
+		
 	n_gram_length = len(random_first_key)
 	words = list(random_first_key)
 
